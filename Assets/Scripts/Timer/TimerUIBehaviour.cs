@@ -1,0 +1,39 @@
+using UnityEngine;
+using Dennis.Variables;
+using TMPro;
+
+public class TimerUIBehaviour : MonoBehaviour
+{
+    [SerializeField]
+    private FloatVariable timeLeft;
+
+    [SerializeField]
+    private TextMeshProUGUI timerText;
+
+    private void OnEnable()
+    {
+        timeLeft.OnValueChanged -= timeLeftChanged;
+        timeLeft.OnValueChanged += timeLeftChanged;
+    }
+
+    private void timeLeftChanged(float timeLeft)
+    {
+        if (timeLeft < 0) return;
+        timerText.text = timeLeft.ToString();
+    }
+
+    private void Unsubscribe()
+    {
+        timeLeft.OnValueChanged -= timeLeftChanged;
+    }
+
+    private void OnDestroy()
+    {
+        Unsubscribe();
+    }
+
+    private void OnDisable()
+    {
+        Unsubscribe();
+    }
+}
