@@ -18,12 +18,17 @@ namespace Dennis.Variables
             get => value;
             set
             {
-                if (this.value.Equals(value))
+                if (!this.value.Equals(value))
                 {
                     this.value = value;
                     OnValueChanged?.Invoke(value);
                 }
             }
+        }
+
+        private void OnValidate()
+        {
+            OnValueChanged?.Invoke(value);
         }
     }
 }
