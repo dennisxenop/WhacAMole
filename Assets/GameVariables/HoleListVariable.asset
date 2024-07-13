@@ -13,13 +13,4 @@ MonoBehaviour:
   m_Name: HoleListVariable
   m_EditorClassIdentifier: 
   DeveloperDescription: 
-  value:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  value: []

@@ -12,10 +12,10 @@ namespace Dennis.Variables
 #endif
         public event Action<T> OnValueChanged;
 
-        private T resetValue;
+        protected T resetValue;
 
         [SerializeField]
-        private T value;
+        protected T value;
         public T Value
         {
             get => value;
@@ -31,11 +31,16 @@ namespace Dennis.Variables
 
         private void OnValidate()
         {
-            if (!Application.isPlaying) resetValue = value; 
+            if (!Application.isPlaying) SetResetValue();
             OnValueChanged?.Invoke(value);
         }
 
-        public void PlaymodeExitReset()
+        public virtual void SetResetValue()
+        {
+            resetValue = value;
+        }
+
+        public virtual void PlaymodeExitReset()
         {
             value = resetValue;
         }

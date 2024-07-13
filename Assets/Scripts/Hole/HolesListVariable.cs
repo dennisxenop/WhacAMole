@@ -14,5 +14,15 @@ namespace Dennis.Variables
             Value.Add(holeBehaviour);
             return true;
         }
+
+        public override void SetResetValue()
+        {
+            resetValue = new List<HoleBehaviour>(value);
+        }
+
+        public override void PlaymodeExitReset()
+        {
+            value = new List<HoleBehaviour>(resetValue);
+        }
     }
 }
