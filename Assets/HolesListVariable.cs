@@ -1,14 +1,18 @@
 ﻿using System.Collections.Generic;
+using UnityEngine;
 
-internal class HolesListVariable
+namespace Dennis.Variables
 {
-    private List<HoleBehaviour> holeListBehaviours = new List<HoleBehaviour>();
+    [CreateAssetMenu(fileName = "HoleListVariable", menuName = "Variables/HoleListVariable")]
 
-    //return false when already added
-    public bool AddHole(HoleBehaviour holeBehaviour)
+    public class HolesListVariable : ScriptableObjectVariable<List<HoleBehaviour>>
     {
-        if (holeListBehaviours.Contains(holeBehaviour)) return false;
-        holeListBehaviours.Add(holeBehaviour);
-        return true;
+        //return false when already added
+        public bool AddHole(HoleBehaviour holeBehaviour)
+        {
+            if (Value.Contains(holeBehaviour)) return false;
+            Value.Add(holeBehaviour);
+            return true;
+        }
     }
 }

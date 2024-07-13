@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Dennis.Variables
 {
-    public abstract class ScriptableObjectVariable<T> : ScriptableObject where T : IEquatable<T>
+    public abstract class ScriptableObjectVariable<T> : ScriptableObject
     {
 #if UNITY_EDITOR
         [Multiline]
