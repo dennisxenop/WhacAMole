@@ -2,88 +2,91 @@ using Dennis.Variables;
 using System.Collections;
 using UnityEngine;
 
-public class TimeBehaviour : MonoBehaviour
+namespace Dennis.Timer
 {
-    [SerializeField]
-    private BoolVariable roundRunning;
-
-    [SerializeField]
-    private FloatVariable timeTotal;
-
-    [SerializeField]
-    private FloatVariable timeLeft;
-
-    private Coroutine countdownCoroutine;
-
-    private float currentTime;
-    private int lastTimeInSeconds;
-    private void OnEnable()
+    public class TimeBehaviour : MonoBehaviour
     {
-        roundRunning.OnValueChanged -= roundRunningChanged;
-        roundRunning.OnValueChanged += roundRunningChanged;
-    }
+        [SerializeField]
+        private BoolVariable roundRunning;
 
-    private void Start()
-    {
-        timeLeft.Value = timeTotal.Value;
-        currentTime = timeTotal.Value;
-        lastTimeInSeconds = Mathf.CeilToInt(timeTotal.Value);
-    }
+        [SerializeField]
+        private FloatVariable timeTotal;
 
-    private void roundRunningChanged(bool isRunning)
-    {
-        StopCountdown();
+        [SerializeField]
+        private FloatVariable timeLeft;
 
-        if (!isRunning || timeLeft.Value <= 0)
+        private Coroutine countdownCoroutine;
+
+        private float currentTime;
+        private int lastTimeInSeconds;
+        private void OnEnable()
         {
-            return;
+            roundRunning.OnValueChanged -= roundRunningChanged;
+            roundRunning.OnValueChanged += roundRunningChanged;
         }
 
-        StartCountdown();
-    }
-
-    private void StopCountdown()
-    {
-        if (countdownCoroutine != null)
+        private void Start()
         {
-            StopCoroutine(countdownCoroutine);
+            timeLeft.Value = timeTotal.Value;
+            currentTime = timeTotal.Value;
+            lastTimeInSeconds = Mathf.CeilToInt(timeTotal.Value);
         }
-    }
 
-    private void StartCountdown()
-    {
-        countdownCoroutine = StartCoroutine(CountdownRoutine());
-    }
-
-    private IEnumerator CountdownRoutine()
-    {
-        while (currentTime > 0)
+        private void roundRunningChanged(bool isRunning)
         {
-            currentTime -= Time.deltaTime;
-            int roundedTime = Mathf.CeilToInt(currentTime);
+            StopCountdown();
 
-            if (roundedTime != lastTimeInSeconds)
+            if (!isRunning || timeLeft.Value <= 0)
             {
-                lastTimeInSeconds = roundedTime;
-                timeLeft.Value = lastTimeInSeconds;
+                return;
             }
-            yield return null;
+
+            StartCountdown();
         }
-        timeLeft.Value = 0;
-    }
 
-    private void Unsubscribe()
-    {
-        roundRunning.OnValueChanged -= roundRunningChanged;
-    }
+        private void StopCountdown()
+        {
+            if (countdownCoroutine != null)
+            {
+                StopCoroutine(countdownCoroutine);
+            }
+        }
 
-    private void OnDestroy()
-    {
-        Unsubscribe();
-    }
+        private void StartCountdown()
+        {
+            countdownCoroutine = StartCoroutine(CountdownRoutine());
+        }
 
-    private void OnDisable()
-    {
-        Unsubscribe();
+        private IEnumerator CountdownRoutine()
+        {
+            while (currentTime > 0)
+            {
+                currentTime -= Time.deltaTime;
+                int roundedTime = Mathf.CeilToInt(currentTime);
+
+                if (roundedTime != lastTimeInSeconds)
+                {
+                    lastTimeInSeconds = roundedTime;
+                    timeLeft.Value = lastTimeInSeconds;
+                }
+                yield return null;
+            }
+            timeLeft.Value = 0;
+        }
+
+        private void Unsubscribe()
+        {
+            roundRunning.OnValueChanged -= roundRunningChanged;
+        }
+
+        private void OnDestroy()
+        {
+            Unsubscribe();
+        }
+
+        private void OnDisable()
+        {
+            Unsubscribe();
+        }
     }
 }

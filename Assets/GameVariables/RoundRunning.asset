@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: RoundRunning
   m_EditorClassIdentifier: 
   DeveloperDescription: Is the round running
-  value: 1
+  value: 0
