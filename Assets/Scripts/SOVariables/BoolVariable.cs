@@ -1,8 +1,10 @@
-﻿using Dennis.Variables;
-using UnityEngine;
+﻿using UnityEngine;
 
-[CreateAssetMenu(fileName = "BoolVariable", menuName = "Variables/BoolVariable")]
-public class BoolVariable : ScriptableObjectVariable<bool>
+namespace Dennis.Variables
 {
+    [CreateAssetMenu(fileName = "BoolVariable", menuName = "Variables/BoolVariable")]
+    public class BoolVariable : ScriptableObjectVariable<bool>
+    {
 
+    }
 }
