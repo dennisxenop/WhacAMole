@@ -12,11 +12,18 @@ public class HoleBehaviour : MonoBehaviour, IHole
     [SerializeField, RequireInterface(typeof(IHoleView))]
     private Object nonMoleViewObject;
     private IHoleView nonMoleView => nonMoleViewObject as IHoleView;
+
     [SerializeField]
     private HolesListVariable holesList;
 
     private Coroutine popDurationCoroutine;
+    private float currentTime;
+    private WaitForEndOfFrame waitForEndOfFrame;
 
+    private void Awake()
+    {
+        waitForEndOfFrame = new WaitForEndOfFrame();
+    }
     private void OnEnable()
     {
         Assert.IsNotNull(holesList, "holesList is not assigned.");
@@ -28,11 +35,11 @@ public class HoleBehaviour : MonoBehaviour, IHole
 
     public void PopHole(bool isMole, float durationToPop)
     {
-        if (popDurationCoroutine != null)
-        {
+        if(popDurationCoroutine != null) {
             StopCoroutine(popDurationCoroutine);
         }
 
+        currentTime = 0;
         holesList.Remove(this);
         popDurationCoroutine = StartCoroutine(PopDurationCoroutine(isMole, durationToPop));
     }
@@ -40,21 +47,22 @@ public class HoleBehaviour : MonoBehaviour, IHole
     private IEnumerator PopDurationCoroutine(bool isMole, float durationToPop)
     {
         SetActiveState(isMole, true);
-        yield return new WaitForSeconds(durationToPop);
+        while(currentTime < durationToPop && GetHoleView(isMole).IsActive) {
+            currentTime += Time.deltaTime;
+            yield return waitForEndOfFrame;
+        }
         SetActiveState(isMole, false);
         holesList.Add(this);
 
     }
 
+    private IHoleView GetHoleView(bool isMole)
+    {
+        return isMole ? moleView : nonMoleView;
+    }
+
     private void SetActiveState(bool isMole, bool isActive)
     {
-        if (isMole)
-        {
-            moleView.SetActiveState(isActive);
-        }
-        else
-        {
-            nonMoleView.SetActiveState(isActive);
-        }
+        GetHoleView(isMole).SetActiveState(isActive);
     }
 }
