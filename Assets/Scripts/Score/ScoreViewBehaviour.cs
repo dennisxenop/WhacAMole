@@ -1,39 +1,33 @@
 using Dennis.Variables;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Assertions;
 
 public class ScoreViewBehaviour : MonoBehaviour
 {
     [SerializeField]
-    private FloatVariable currentScore;
+    private IntVariable currentScore;
 
     [SerializeField]
     private TextMeshProUGUI scoreText;
 
     private void OnEnable()
     {
+        Assert.IsNotNull(currentScore, "currentScore is not assigned.");
+        Assert.IsNotNull(scoreText, "scoreText is not assigned.");
+
         currentScore.OnValueChanged -= CurrentScoreChanged;
         currentScore.OnValueChanged += CurrentScoreChanged;
     }
 
     private void CurrentScoreChanged()
     {
-        if (currentScore.Value < 0) return;
+        if(currentScore.Value < 0) return;
         scoreText.text = currentScore.Value.ToString();
-    }
-
-    private void Unsubscribe()
-    {
-        currentScore.OnValueChanged -= CurrentScoreChanged;
-    }
-
-    private void OnDestroy()
-    {
-        Unsubscribe();
     }
 
     private void OnDisable()
     {
-        Unsubscribe();
+        currentScore.OnValueChanged -= CurrentScoreChanged;
     }
 }

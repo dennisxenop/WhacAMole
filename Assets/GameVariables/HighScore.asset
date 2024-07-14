@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 01a15db835e779a4489e94f067f8b4ff, type: 3}
-  m_Name: CurrentScore
+  m_Name: HighScore
   m_EditorClassIdentifier: 
-  DeveloperDescription: CurrentScore
+  DeveloperDescription: 
   value: 0
