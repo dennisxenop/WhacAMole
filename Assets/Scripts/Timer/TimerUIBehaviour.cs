@@ -18,9 +18,9 @@ namespace Dennis.Timer
             timeLeft.OnValueChanged += timeLeftChanged;
         }
 
-        private void timeLeftChanged(float timeLeft)
+        private void timeLeftChanged()
         {
-            if (timeLeft < 0) return;
+            if (timeLeft.Value < 0) return;
             timerText.text = timeLeft.ToString();
         }
 

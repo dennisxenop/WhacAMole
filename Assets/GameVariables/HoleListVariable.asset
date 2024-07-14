@@ -9,8 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a1cc498b90920504a90c33a13178accf, type: 3}
-  m_Name: TimeLeft
+  m_Script: {fileID: 11500000, guid: 7f5693c30a381084cb5d71081f22f656, type: 3}
+  m_Name: HoleListVariable
   m_EditorClassIdentifier: 
-  DeveloperDescription: The time that is left in the round
-  value: 13
+  DeveloperDescription: gghgjg
