@@ -1,30 +1,32 @@
-using System.Collections;
+using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 namespace Dennis.Events
 {
     [CreateAssetMenu]
-    public class GameEvent : ScriptableObject
+    public class GameEvent : ScriptableObject, IGameEvent
     {
-        private readonly List<GameEventListener> eventListeners =
-            new List<GameEventListener>();
+        private readonly Dictionary<IGameEventListener, Action> eventListeners =
+            new Dictionary<IGameEventListener, Action>();
 
         public void Raise()
         {
-            for (int i = eventListeners.Count - 1; i >= 0; i--)
-                eventListeners[i].OnEventRaised();
+            foreach(KeyValuePair<IGameEventListener, Action> eventListener in eventListeners.Reverse()) {
+                eventListener.Key.OnEventRaised(eventListener.Value);
+            }
         }
 
-        public void RegisterListener(GameEventListener listener)
+        public void RegisterListener(IGameEventListener listener, Action EventAction)
         {
-            if (!eventListeners.Contains(listener))
-                eventListeners.Add(listener);
+            if(!eventListeners.ContainsKey(listener))
+                eventListeners.Add(listener, EventAction);
         }
 
-        public void UnregisterListener(GameEventListener listener)
+        public void UnregisterListener(IGameEventListener listener, Action EventAction)
         {
-            if (eventListeners.Contains(listener))
+            if(eventListeners.ContainsKey(listener))
                 eventListeners.Remove(listener);
         }
     }
