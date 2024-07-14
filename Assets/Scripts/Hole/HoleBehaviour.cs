@@ -32,6 +32,8 @@ public class HoleBehaviour : MonoBehaviour, IHole
         {
             StopCoroutine(popDurationCoroutine);
         }
+
+        holesList.Remove(this);
         popDurationCoroutine = StartCoroutine(PopDurationCoroutine(isMole, durationToPop));
     }
 
@@ -40,6 +42,8 @@ public class HoleBehaviour : MonoBehaviour, IHole
         SetActiveState(isMole, true);
         yield return new WaitForSeconds(durationToPop);
         SetActiveState(isMole, false);
+        holesList.Add(this);
+
     }
 
     private void SetActiveState(bool isMole, bool isActive)

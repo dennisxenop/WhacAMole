@@ -14,8 +14,6 @@ public class HoleFieldBehaviour : MonoBehaviour
     [SerializeField]
     private BoolVariable roundRunning;
 
-
-
     public void OnEnable()
     {
         roundRunning.OnValueChanged -= roundRunningChanged;
@@ -53,6 +51,5 @@ public class HoleFieldBehaviour : MonoBehaviour
             holeBehaviour.PopHole(UnityEngine.Random.value > 0.5f, UnityEngine.Random.Range(1, 4));
             yield return new WaitForSeconds(UnityEngine.Random.Range(1, 2));
         }
-
     }
 }
