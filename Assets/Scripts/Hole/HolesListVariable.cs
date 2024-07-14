@@ -1,28 +1,33 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace Dennis.Variables
 {
     [CreateAssetMenu(fileName = "HoleListVariable", menuName = "Variables/HoleListVariable")]
 
-    public class HolesListVariable : ScriptableObjectVariable<List<HoleBehaviour>>
+    public class HolesListVariable : ScriptableObjectVariable<List<IHole>>, ISOAccesableListVariable<IHole>, IReadOnlyList<IHole>
     {
-        //return false when already added
-        public bool AddHole(HoleBehaviour holeBehaviour)
+        public IHole this[int index] => value[index];
+
+        public int Count => value.Count;
+
+        public void Add(IHole holeBehaviour)
         {
-            if (Value.Contains(holeBehaviour)) return false;
-            Value.Add(holeBehaviour);
-            return true;
+            if (value.Contains(holeBehaviour)) { Debug.LogWarning("Holebehaviour already added"); return; }
+
+            value.Add(holeBehaviour);
+            Invoke();
         }
 
-        public override void SetResetValue()
+        public IEnumerator<IHole> GetEnumerator()
         {
-            resetValue = new List<HoleBehaviour>(value);
+            return value.GetEnumerator();
         }
 
-        public override void PlaymodeExitReset()
+        IEnumerator IEnumerable.GetEnumerator()
         {
-            value = new List<HoleBehaviour>(resetValue);
+            return value.GetEnumerator();
         }
     }
 }

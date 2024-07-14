@@ -3,13 +3,15 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.Assertions;
 
-public class HoleBehaviour : MonoBehaviour
+public class HoleBehaviour : MonoBehaviour, IHole
 {
-    [SerializeField]
-    private GameObject moleGO;
-    [SerializeField]
-    private GameObject nonMoleGo;
+    [SerializeField, RequireInterface(typeof(IHoleView))]
+    private Object moleViewObject;
+    private IHoleView moleView => moleViewObject as IHoleView;
 
+    [SerializeField, RequireInterface(typeof(IHoleView))]
+    private Object nonMoleViewObject;
+    private IHoleView nonMoleView => nonMoleViewObject as IHoleView;
     [SerializeField]
     private HolesListVariable holesList;
 
@@ -18,10 +20,10 @@ public class HoleBehaviour : MonoBehaviour
     private void OnEnable()
     {
         Assert.IsNotNull(holesList, "holesList is not assigned.");
-        Assert.IsNotNull(moleGO, "moleGO is not assigned.");
-        Assert.IsNotNull(nonMoleGo, "nonMoleGo is not assigned.");
+        Assert.IsNotNull(moleView, "moleView is not assigned.");
+        Assert.IsNotNull(nonMoleView, "nonMoleView is not assigned.");
 
-        holesList.AddHole(this);
+        holesList.Add(this);
     }
 
     public void PopHole(bool isMole, float durationToPop)
@@ -44,11 +46,11 @@ public class HoleBehaviour : MonoBehaviour
     {
         if (isMole)
         {
-            moleGO.SetActive(isActive);
+            moleView.SetActiveState(isActive);
         }
         else
         {
-            nonMoleGo.SetActive(isActive);
+            nonMoleView.SetActiveState(isActive);
         }
     }
 }

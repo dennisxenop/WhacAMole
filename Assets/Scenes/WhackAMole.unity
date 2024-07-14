@@ -1076,7 +1076,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47eff7120d4c50045b412706c59b7e9b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  holesListVariable: {fileID: 11400000, guid: 5b3be56f3d744154dbbda22b94907adc, type: 2}
+  holesListVariable: {fileID: 11400000, guid: 8c7d1544272811e4ea6be776a721f51b, type: 2}
   roundRunning: {fileID: 11400000, guid: 6b6c79bf49b674541a6a20f03b39fd70, type: 2}
 --- !u!4 &1616325983
 Transform:

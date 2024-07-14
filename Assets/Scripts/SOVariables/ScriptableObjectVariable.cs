@@ -4,45 +4,38 @@ using Dennis.Reset;
 
 namespace Dennis.Variables
 {
-    public abstract class ScriptableObjectVariable<T> : ScriptableObject, IResetOnPlaymodeExit
+    public abstract class ScriptableObjectVariable<T> : ScriptableObject, IResetOnPlaymodeExit where T : new()
     {
 #if UNITY_EDITOR
         [Multiline]
         public string DeveloperDescription = "";
 #endif
-        public event Action<T> OnValueChanged;
+        public event Action OnValueChanged;
 
         protected T resetValue;
 
         [SerializeField]
         protected T value;
-        public T Value
-        {
-            get => value;
-            set
-            {
-                if (!this.value.Equals(value))
-                {
-                    this.value = value;
-                    OnValueChanged?.Invoke(value);
-                }
-            }
-        }
 
         private void OnValidate()
         {
             if (!Application.isPlaying) SetResetValue();
-            OnValueChanged?.Invoke(value);
+            Invoke();
         }
 
-        public virtual void SetResetValue()
+        protected void Invoke()
         {
-            resetValue = value;
+            OnValueChanged?.Invoke();
         }
 
-        public virtual void PlaymodeExitReset()
+        public void SetResetValue()
         {
-            value = resetValue;
+            resetValue = value == null ? value = new T() : value;
+        }
+
+        public void PlaymodeExitReset()
+        {
+            value = resetValue == null ? resetValue = new T() : resetValue;
         }
     }
 }

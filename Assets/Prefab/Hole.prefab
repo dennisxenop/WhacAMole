@@ -90,9 +90,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a13b6fd1114161d408b6c2553b8c8721, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moleGO: {fileID: 6552319287890823255}
-  nonMoleGo: {fileID: 5433567530462356715}
-  holesList: {fileID: 11400000, guid: 5b3be56f3d744154dbbda22b94907adc, type: 2}
+  moleViewObject: {fileID: 7168202247124772335}
+  nonMoleViewObject: {fileID: 8558834731991783908}
+  holesList: {fileID: 11400000, guid: 8c7d1544272811e4ea6be776a721f51b, type: 2}
 --- !u!1 &5433567530462356715
 GameObject:
   m_ObjectHideFlags: 0
@@ -104,8 +104,8 @@ GameObject:
   - component: {fileID: 8091063203770943816}
   - component: {fileID: 6941344217121198676}
   - component: {fileID: 6634026816884212990}
-  - component: {fileID: 1009585585457286427}
   - component: {fileID: 6685243342303788669}
+  - component: {fileID: 8558834731991783908}
   m_Layer: 5
   m_Name: Stone
   m_TagString: Untagged
@@ -170,19 +170,6 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &1009585585457286427
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5433567530462356715}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 791fd8c32396e4b4db79c76c5acd1a71, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  clickEvent: {fileID: 11400000, guid: 7cda08bafdebbf14fbe984385d698294, type: 2}
 --- !u!114 &6685243342303788669
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -226,7 +213,32 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 6634026816884212990}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 8558834731991783908}
+        m_TargetAssemblyTypeName: HoleViewBehaviour, Assembly-CSharp
+        m_MethodName: OnClick
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &8558834731991783908
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5433567530462356715}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e65c5678be744f043b27931832ab4a47, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  clickEvent: {fileID: 11400000, guid: 7cda08bafdebbf14fbe984385d698294, type: 2}
 --- !u!1 &6552319287890823255
 GameObject:
   m_ObjectHideFlags: 0
@@ -239,7 +251,7 @@ GameObject:
   - component: {fileID: 5147267570991874783}
   - component: {fileID: 6950450143489408150}
   - component: {fileID: 2757479059965049781}
-  - component: {fileID: 2545935586416765213}
+  - component: {fileID: 7168202247124772335}
   m_Layer: 5
   m_Name: Mole
   m_TagString: Untagged
@@ -347,8 +359,20 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 6950450143489408150}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
---- !u!114 &2545935586416765213
+      m_Calls:
+      - m_Target: {fileID: 7168202247124772335}
+        m_TargetAssemblyTypeName: HoleViewBehaviour, Assembly-CSharp
+        m_MethodName: OnClick
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &7168202247124772335
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -357,7 +381,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 6552319287890823255}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 791fd8c32396e4b4db79c76c5acd1a71, type: 3}
+  m_Script: {fileID: 11500000, guid: e65c5678be744f043b27931832ab4a47, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   clickEvent: {fileID: 11400000, guid: 359a984c93d56a24397f7673cbbd9ae2, type: 2}

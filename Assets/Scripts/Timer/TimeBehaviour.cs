@@ -32,11 +32,11 @@ namespace Dennis.Timer
             lastTimeInSeconds = Mathf.CeilToInt(timeTotal.Value);
         }
 
-        private void roundRunningChanged(bool isRunning)
+        private void roundRunningChanged()
         {
             StopCountdown();
 
-            if (!isRunning || timeLeft.Value <= 0)
+            if (!roundRunning.Value || timeLeft.Value <= 0)
             {
                 return;
             }

@@ -30,7 +30,7 @@ public class HoleFieldBehaviour : MonoBehaviour
 
     private void EnqueueHoleBehaviours()
     {
-        foreach (HoleBehaviour hole in holesListVariable.Value)
+        foreach (HoleBehaviour hole in holesListVariable)
         {
             holeListQueue.Add(hole);
         }
@@ -38,9 +38,9 @@ public class HoleFieldBehaviour : MonoBehaviour
         ListUtility.Shuffle(holeListQueue);
     }
 
-    private void roundRunningChanged(bool isRunning)
+    private void roundRunningChanged()
     {
-        if (!isRunning) return;
+        if (!roundRunning.Value) return;
         StartCoroutine(routine());
     }
 
@@ -48,7 +48,7 @@ public class HoleFieldBehaviour : MonoBehaviour
     {
         while (roundRunning.Value)
         {
-            HoleBehaviour holeBehaviour = holesListVariable.Value[UnityEngine.Random.Range(0, holesListVariable.Value.Count)];
+            IHole holeBehaviour = holesListVariable[UnityEngine.Random.Range(0, holesListVariable.Count)];
             Assert.IsNotNull(holeBehaviour, "holeBehaviour is not found");
             holeBehaviour.PopHole(UnityEngine.Random.value > 0.5f, UnityEngine.Random.Range(1, 4));
             yield return new WaitForSeconds(UnityEngine.Random.Range(1, 2));
