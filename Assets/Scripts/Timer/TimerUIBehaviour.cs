@@ -21,7 +21,7 @@ namespace Dennis.Timer
         private void timeLeftChanged()
         {
             if (timeLeft.Value < 0) return;
-            timerText.text = timeLeft.ToString();
+            timerText.text = timeLeft.Value.ToString();
         }
 
         private void Unsubscribe()

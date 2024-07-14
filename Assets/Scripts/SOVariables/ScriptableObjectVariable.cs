@@ -4,7 +4,7 @@ using Dennis.Reset;
 
 namespace Dennis.Variables
 {
-    public abstract class ScriptableObjectVariable<T> : ScriptableObject, IResetOnPlaymodeExit where T : new()
+    public abstract class ScriptableObjectVariable<T> :  ScriptableObject, IResetOnPlaymodeExit where T : new()
     {
 #if UNITY_EDITOR
         [Multiline]
