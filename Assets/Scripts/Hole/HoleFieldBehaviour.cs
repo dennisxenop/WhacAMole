@@ -16,13 +16,23 @@ public class HoleFieldBehaviour : MonoBehaviour
 
     public void OnEnable()
     {
-        roundRunning.OnValueChanged -= roundRunningChanged;
+        Assert.IsNotNull(roundRunning, "roundRunning is not assigned in the inspector.");
         roundRunning.OnValueChanged += roundRunningChanged;
+    }
 
+    public void OnDisable()
+    {
+        if (roundRunning != null)
+        {
+            roundRunning.OnValueChanged -= roundRunningChanged;
+        }
     }
 
     public void Start()
     {
+        Assert.IsNotNull(holesListVariable, "holesListVariable is not assigned in the inspector.");
+        Assert.IsNotNull(roundRunning, "roundRunning is not assigned in the inspector.");
+
         EnqueueHoleBehaviours();
     }
 
@@ -30,6 +40,7 @@ public class HoleFieldBehaviour : MonoBehaviour
     {
         foreach (HoleBehaviour hole in holesListVariable)
         {
+            Assert.IsNotNull(hole, "hole in holesListVariable is null.");
             holeListQueue.Add(hole);
         }
 
@@ -38,8 +49,10 @@ public class HoleFieldBehaviour : MonoBehaviour
 
     private void roundRunningChanged()
     {
-        if (!roundRunning.Value) return;
-        StartCoroutine(routine());
+        if (roundRunning.Value)
+        {
+            StartCoroutine(routine());
+        }
     }
 
     private IEnumerator routine()
