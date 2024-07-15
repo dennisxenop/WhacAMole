@@ -1,8 +1,6 @@
 using Dennis.Events;
 using Dennis.Variables;
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class ScoreBehaviour : MonoBehaviour, IGameEventListener
@@ -16,12 +14,18 @@ public class ScoreBehaviour : MonoBehaviour, IGameEventListener
     private IGameEvent whackWrongEvent => whackWrongEventObject as IGameEvent;
 
     [SerializeField]
-    private FloatVariable scoreVariable;
+    private IntVariable scoreVariable;
 
     public void OnEnable()
     {
         whackGoodEvent.RegisterListener(this, () => WhackGoodEvent());
         whackWrongEvent.RegisterListener(this, () => WhackWrongEvent());
+    }
+
+    public void OnDisable()
+    {
+        whackGoodEvent.UnregisterListener(this, () => WhackGoodEvent());
+        whackWrongEvent.UnregisterListener(this, () => WhackWrongEvent());
     }
 
     private void WhackGoodEvent()
