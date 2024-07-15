@@ -38,7 +38,8 @@ public class HighScoreBehaviour : MonoBehaviour
 
     private void CheckForHighScore()
     {
-        if(GetHighScore() < currentScore.Value) {
+        if (GetHighScore() < currentScore.Value)
+        {
             SetNewHighScore(currentScore.Value);
         }
     }
@@ -61,12 +62,16 @@ public class HighScoreBehaviour : MonoBehaviour
 
     public int GetHighScore()
     {
-        if(File.Exists(path)) {
+        if (File.Exists(path))
+        {
             string scoreString = File.ReadAllText(path);
-            if(int.TryParse(scoreString, out int score)) {
+            if (int.TryParse(scoreString, out int score))
+            {
                 return score;
             }
         }
+
+        SaveHighScore(0);
         Debug.LogWarning("Could not retrieve highscore or file does not exist");
         return 0;
     }
