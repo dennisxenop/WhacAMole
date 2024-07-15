@@ -12,10 +12,10 @@ namespace Dennis.Variables
 #endif
         public event Action OnValueChanged;
 
-        protected T resetValue;
+        protected T resetValue = new T();
 
         [SerializeField]
-        protected T value;
+        protected T value = new T();
 
         private void OnValidate()
         {
