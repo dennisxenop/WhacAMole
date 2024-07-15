@@ -6,6 +6,7 @@ using UnityEngine.Assertions;
 
 namespace Dennis.Events
 {
+    [CreateAssetMenu]
     public class GameEvent : ScriptableObject, IGameEvent
     {
         private Dictionary<IGameEventListener, List<Action>> eventListeners = new Dictionary<IGameEventListener, List<Action>>();
