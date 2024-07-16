@@ -3,6 +3,7 @@ using Dennis.Variables;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Assertions;
 
 public class GameBehaviour : MonoBehaviour, IGameEventListener
 {
@@ -15,11 +16,20 @@ public class GameBehaviour : MonoBehaviour, IGameEventListener
     private Object roundRunningObject;
     private ISOAccesableVariable<bool> roundRunning => roundRunningObject as ISOAccesableVariable<bool>;
 
+    [SerializeField, RequireInterface(typeof(IGameEvent))]
+    private Object roundEndedObject;
+    private IGameEvent roundEnded => roundEndedObject as IGameEvent;
+
     [SerializeField]
     private FloatVariable timeLeft;
 
     public void OnEnable()
     {
+        Assert.IsNotNull(startGameEvent, "startGameEvent is not assigned.");
+        Assert.IsNotNull(roundRunningObject, "roundRunningObject is not assigned.");
+        Assert.IsNotNull(roundEnded, "roundEnded is not assigned.");
+
+
         startGameEvent.RegisterListener(this, () => StartGameButtonEvent());
 
         timeLeft.OnValueChanged -= timeLeftChanged;
@@ -28,9 +38,9 @@ public class GameBehaviour : MonoBehaviour, IGameEventListener
 
     private void timeLeftChanged()
     {
-        if (timeLeft.Value <= 0)
-        {
+        if(timeLeft.Value <= 0) {
             roundRunning.Value = false;
+            roundEnded.Raise();
         }
     }
 

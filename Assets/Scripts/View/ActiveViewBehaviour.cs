@@ -4,7 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PanelViewBehaviour : MonoBehaviour
+public class ActiveViewBehaviour : MonoBehaviour
 {
     [SerializeField]
     private BoolVariable boolVariable;

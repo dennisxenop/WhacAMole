@@ -1,8 +1,8 @@
 using UnityEngine;
 using Dennis.Variables;
-using Dennis.HighScore;
+using Dennis.Score;
 
 [CreateAssetMenu(fileName = "ScoreListVariable", menuName = "Variables/ScoreListVariable")]
-public class ScoreListVariable : ListSOVariable<HighScoreEntry>
+public class ScoreListVariable : ListSOVariable<ScoreEntry>
 {
 }

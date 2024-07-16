@@ -13,3 +13,4 @@ MonoBehaviour:
   m_Name: ScoreListVariable
   m_EditorClassIdentifier: 
   DeveloperDescription: 
+  value: []

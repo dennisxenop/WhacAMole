@@ -1,10 +1,11 @@
 ﻿using System;
 using UnityEngine;
 using Dennis.Reset;
+using System.Collections.Generic;
 
 namespace Dennis.Variables
 {
-    public abstract class ScriptableObjectVariable<T> :  ScriptableObject, IResetOnPlaymodeExit where T : new()
+    public abstract class ScriptableObjectVariable<T> :  ScriptableObject, IResetOnPlaymodeExit
     {
 #if UNITY_EDITOR
         [Multiline]
@@ -12,10 +13,10 @@ namespace Dennis.Variables
 #endif
         public event Action OnValueChanged;
 
-        protected T resetValue = new T();
+        protected T resetValue;
 
         [SerializeField]
-        protected T value = new T();
+        protected T value;
 
         private void OnValidate()
         {
@@ -30,12 +31,20 @@ namespace Dennis.Variables
 
         public void SetResetValue()
         {
-            resetValue = value == null ? value = new T() : value;
+            resetValue = value;
         }
 
         public void PlaymodeExitReset()
         {
-            value = resetValue == null ? resetValue = new T() : resetValue;
+            value = resetValue;
+        }
+
+        private void OnEnable()
+        {
+            // Ensure that value is initialized.
+            if(EqualityComparer<T>.Default.Equals(value, default(T))) {
+                value = Activator.CreateInstance<T>();
+            }
         }
     }
 }

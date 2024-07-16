@@ -6,7 +6,7 @@ using UnityEngine.Assertions;
 public class ScoreViewBehaviour : MonoBehaviour
 {
     [SerializeField]
-    private IntVariable currentScore;
+    private ScoreVariable currentScore;
 
     [SerializeField]
     private TextMeshProUGUI scoreText;
@@ -22,8 +22,8 @@ public class ScoreViewBehaviour : MonoBehaviour
 
     private void CurrentScoreChanged()
     {
-        if(currentScore.Value < 0) return;
-        scoreText.text = currentScore.Value.ToString();
+        if(currentScore.Value.Score < 0) return;
+        scoreText.text = currentScore.Value.Score.ToString();
     }
 
     private void OnDisable()

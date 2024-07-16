@@ -172,7 +172,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c2dfaae3a1f17784e9fa70a6169c1cec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentScore: {fileID: 11400000, guid: 00f5674bf4255b44ea07313b30d1c657, type: 2}
+  currentScore: {fileID: 11400000, guid: 4e8c7237fc05a2e48b25c1705a8524da, type: 2}
   scoreText: {fileID: 57518333}
 --- !u!114 &57518333
 MonoBehaviour:
@@ -303,6 +303,7 @@ MonoBehaviour:
   startGameEventObject: {fileID: 11400000, guid: d3827d36aeab7b242a1dffa36aa9ba0c,
     type: 2}
   roundRunningObject: {fileID: 11400000, guid: 6b6c79bf49b674541a6a20f03b39fd70, type: 2}
+  roundEndedObject: {fileID: 11400000, guid: 946eeb3723fc4fa488bf88bac08dd637, type: 2}
   timeLeft: {fileID: 11400000, guid: e8a491c92eb9bb04497c684d46b73b60, type: 2}
 --- !u!4 &63016299
 Transform:
@@ -1725,7 +1726,7 @@ GameObject:
   - component: {fileID: 1138467302}
   - component: {fileID: 1138467301}
   m_Layer: 0
-  m_Name: HighScoreBehaviour
+  m_Name: ScoreBehaviour
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1743,9 +1744,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4787d33c50cf34246adc0d10b69055a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentScore: {fileID: 11400000, guid: 00f5674bf4255b44ea07313b30d1c657, type: 2}
+  currentScore: {fileID: 11400000, guid: 4e8c7237fc05a2e48b25c1705a8524da, type: 2}
   highScore: {fileID: 11400000, guid: 185e4f56b95ef6840a3ae2473890ad7b, type: 2}
-  scores: {fileID: 0}
+  scores: {fileID: 11400000, guid: dc5a99b43a652ef49af7718e8d020646, type: 2}
+  playerName: {fileID: 11400000, guid: d4e4f8d8ab12b7a4d965776122eb10d7, type: 2}
+  roundEndedObject: {fileID: 11400000, guid: 946eeb3723fc4fa488bf88bac08dd637, type: 2}
+  AddToScoreEventObject: {fileID: 11400000, guid: 3ec7c4fc2dc2e1a4b83834c3da710809,
+    type: 2}
+  subtractFromScoreEventObject: {fileID: 11400000, guid: 36aee9aa88e2ca14c9f0456570054049,
+    type: 2}
 --- !u!4 &1138467302
 Transform:
   m_ObjectHideFlags: 0
@@ -2499,7 +2506,7 @@ GameObject:
   - component: {fileID: 1396706073}
   - component: {fileID: 1396706072}
   m_Layer: 0
-  m_Name: ScoreBehaviour
+  m_Name: WhackBehaviour
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2521,7 +2528,10 @@ MonoBehaviour:
     type: 2}
   whackWrongEventObject: {fileID: 11400000, guid: 7cda08bafdebbf14fbe984385d698294,
     type: 2}
-  scoreVariable: {fileID: 11400000, guid: 00f5674bf4255b44ea07313b30d1c657, type: 2}
+  AddToScoreEventObject: {fileID: 11400000, guid: 3ec7c4fc2dc2e1a4b83834c3da710809,
+    type: 2}
+  subtractFromScoreEventObject: {fileID: 11400000, guid: 36aee9aa88e2ca14c9f0456570054049,
+    type: 2}
 --- !u!4 &1396706073
 Transform:
   m_ObjectHideFlags: 0

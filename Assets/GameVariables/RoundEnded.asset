@@ -9,7 +9,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 86104169b94179545b77ee125c9899ab, type: 3}
-  m_Name: CurrentScore
+  m_Script: {fileID: 11500000, guid: 3d6d5cbcf38e5e748a9bff8d179f3d3f, type: 3}
+  m_Name: RoundEnded
   m_EditorClassIdentifier: 
-  DeveloperDescription: 
