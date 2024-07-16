@@ -18,6 +18,8 @@ public class ScoreViewBehaviour : MonoBehaviour
 
         currentScore.OnValueChanged -= CurrentScoreChanged;
         currentScore.OnValueChanged += CurrentScoreChanged;
+
+        CurrentScoreChanged();
     }
 
     private void CurrentScoreChanged()

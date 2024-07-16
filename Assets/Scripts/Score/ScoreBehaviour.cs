@@ -2,6 +2,7 @@ using Dennis.Events;
 using Dennis.Variables;
 using System.Collections.Generic;
 using System.IO;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Assertions;
 
@@ -34,6 +35,10 @@ namespace Dennis.Score
         private UnityEngine.Object subtractFromScoreEventObject;
         private IGameEvent subtractFromScoreEvent => subtractFromScoreEventObject as IGameEvent;
 
+        [SerializeField, RequireInterface(typeof(ISOAccesableVariable<bool>))]
+        private UnityEngine.Object newHighScoreVariableObject;
+        private ISOAccesableVariable<bool> newHighScoreVariable => newHighScoreVariableObject as ISOAccesableVariable<bool>;
+
         private void OnEnable()
         {
             Assert.IsNotNull(currentScore, "currentScore is not assigned.");
@@ -43,8 +48,9 @@ namespace Dennis.Score
             Assert.IsNotNull(roundEndedEvent, "roundEnded is not assigned.");
             Assert.IsNotNull(addToScoreEvent, "roundEnded is not assigned.");
             Assert.IsNotNull(subtractFromScoreEvent, "roundEnded is not assigned.");
+            Assert.IsNotNull(newHighScoreVariable, "newHighScoreVariable is not assigned.");
 
-            path = Path.Combine(Application.persistentDataPath, "highScore.txt");
+            path = Path.Combine(Application.persistentDataPath, "score.txt");
 
             currentScore.OnValueChanged -= CurrentScoreChanged;
             currentScore.OnValueChanged += CurrentScoreChanged;
@@ -97,6 +103,7 @@ namespace Dennis.Score
         {
             if(highScore.Value.Score < currentScore.Value.Score) {
                 UpdateLocalHighScoreVariable(playerName.Value, currentScore.Value.Score);
+                newHighScoreVariable.Value = true;
             }
         }
 

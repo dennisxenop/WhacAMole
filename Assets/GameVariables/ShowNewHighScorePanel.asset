@@ -9,8 +9,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a1cc498b90920504a90c33a13178accf, type: 3}
-  m_Name: TimeTotal
+  m_Script: {fileID: 11500000, guid: 3d6d5cbcf38e5e748a9bff8d179f3d3f, type: 3}
+  m_Name: ShowNewHighScorePanel
   m_EditorClassIdentifier: 
-  DeveloperDescription: The total time of the round.
-  value: 15

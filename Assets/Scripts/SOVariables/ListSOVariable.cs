@@ -12,10 +12,15 @@ namespace Dennis.Variables
 
         public void Add(T item)
         {
-            if(value.Contains(item)) { Debug.LogWarning("item already added"); return; }
-
             value.Add(item);
             Invoke();
+        }
+
+        public void AddOnce(T item)
+        {
+            if(value.Contains(item)) { Debug.LogWarning("item already added"); return; }
+
+            Add(item);
         }
 
         public void Set(List<T> items)
