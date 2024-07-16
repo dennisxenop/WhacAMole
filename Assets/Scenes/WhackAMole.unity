@@ -1745,6 +1745,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentScore: {fileID: 11400000, guid: 00f5674bf4255b44ea07313b30d1c657, type: 2}
   highScore: {fileID: 11400000, guid: 185e4f56b95ef6840a3ae2473890ad7b, type: 2}
+  scores: {fileID: 0}
 --- !u!4 &1138467302
 Transform:
   m_ObjectHideFlags: 0

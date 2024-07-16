@@ -1,78 +1,101 @@
 using Dennis.Variables;
 using System;
+using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
 using UnityEngine.Assertions;
 
-public class HighScoreBehaviour : MonoBehaviour
+namespace Dennis.HighScore
 {
-    private string path;
-
-    [SerializeField]
-    private IntVariable currentScore;
-    [SerializeField]
-    private IntVariable highScore;
-
-    private void OnEnable()
+    public class HighScoreBehaviour : MonoBehaviour
     {
-        Assert.IsNotNull(currentScore, "currentScore is not assigned.");
-        Assert.IsNotNull(highScore, "highScore is not assigned.");
+        private string path;
 
-        path = Path.Combine(Application.persistentDataPath, "highScore.txt");
+        [SerializeField]
+        private IntVariable currentScore;
+        [SerializeField]
+        private IntVariable highScore;
 
-        currentScore.OnValueChanged -= CurrentScoreChanged;
-        currentScore.OnValueChanged += CurrentScoreChanged;
+        [SerializeField]
+        private ScoreListVariable scores;
 
-        UpdateLocalHighScoreVariable(GetHighScore());
-    }
+        [SerializeField]
+        private StringVariable playerName;
 
-    private void OnDisable()
-    {
-        currentScore.OnValueChanged -= CurrentScoreChanged;
-    }
-
-    private void CurrentScoreChanged()
-    {
-        CheckForHighScore();
-    }
-
-    private void CheckForHighScore()
-    {
-        if (GetHighScore() < currentScore.Value)
+        private void OnEnable()
         {
-            SetNewHighScore(currentScore.Value);
-        }
-    }
+            Assert.IsNotNull(currentScore, "currentScore is not assigned.");
+            Assert.IsNotNull(highScore, "highScore is not assigned.");
 
-    private void SetNewHighScore(int newScore)
-    {
-        SaveHighScore(newScore);
-        UpdateLocalHighScoreVariable(newScore);
-    }
+            path = Path.Combine(Application.persistentDataPath, "highScore.txt");
 
-    private void UpdateLocalHighScoreVariable(int newScore)
-    {
-        highScore.Value = newScore;
-    }
+            currentScore.OnValueChanged -= CurrentScoreChanged;
+            currentScore.OnValueChanged += CurrentScoreChanged;
 
-    public void SaveHighScore(int score)
-    {
-        File.WriteAllText(path, score.ToString());
-    }
+            scores.AddRange(LoadScores());
 
-    public int GetHighScore()
-    {
-        if (File.Exists(path))
-        {
-            string scoreString = File.ReadAllText(path);
-            if (int.TryParse(scoreString, out int score))
+            if (scores.Count > 0)
             {
-                return score;
+                UpdateLocalHighScoreVariable(scores[0].Score);
             }
         }
 
-        SaveHighScore(0);
-        Debug.LogWarning("Could not retrieve highscore or file does not exist");
-        return 0;
+        private void OnDisable()
+        {
+            currentScore.OnValueChanged -= CurrentScoreChanged;
+        }
+
+        private void CurrentScoreChanged()
+        {
+            CheckForHighScore();
+        }
+
+        private void CheckForHighScore()
+        {
+            if (scores[0].Score < currentScore.Value)
+            {
+                UpdateLocalHighScoreVariable(currentScore.Value);
+            }
+        }
+
+        private void UpdateLocalHighScoreVariable(int newScore)
+        {
+            highScore.Value = newScore;
+        }
+
+        public void SaveScores(List<HighScoreEntry> highScores)
+        {
+            using (StreamWriter writer = new StreamWriter(path))
+            {
+                foreach (HighScoreEntry entry in highScores)
+                {
+                    writer.WriteLine(entry.Name + "," + entry.Score);
+                }
+            }
+        }
+
+        public List<HighScoreEntry> LoadScores()
+        {
+            List<HighScoreEntry> highScores = new List<HighScoreEntry>();
+
+            if (File.Exists(path))
+            {
+                using (StreamReader reader = new StreamReader(path))
+                {
+                    string line;
+                    while ((line = reader.ReadLine()) != null)
+                    {
+                        string[] parts = line.Split(',');
+                        if (parts.Length == 2)
+                        {
+                            HighScoreEntry entry = new HighScoreEntry(parts[0], int.Parse(parts[1]));
+                            highScores.Add(entry);
+                        }
+                    }
+                }
+            }
+
+            return highScores;
+        }
     }
 }

@@ -12,9 +12,15 @@ namespace Dennis.Variables
 
         public void Add(T item)
         {
-            if (value.Contains(item)) { Debug.LogWarning("Holebehaviour already added"); return; }
+            if (value.Contains(item)) { Debug.LogWarning("item already added"); return; }
 
             value.Add(item);
+            Invoke();
+        }
+
+        public void AddRange(List<T> items)
+        {
+            value.AddRange(items);
             Invoke();
         }
 
