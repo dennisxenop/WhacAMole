@@ -2,9 +2,11 @@ using Dennis.Variables;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.Assertions;
+using UnityEngine.SceneManagement;
 
 public class HoleBehaviour : MonoBehaviour, IHole
 {
+
     [SerializeField, RequireInterface(typeof(IHoleView))]
     private Object moleViewObject;
     private IHoleView moleView => moleViewObject as IHoleView;
@@ -24,13 +26,13 @@ public class HoleBehaviour : MonoBehaviour, IHole
     {
         waitForEndOfFrame = new WaitForEndOfFrame();
     }
-    private void OnEnable()
+    private void Start()
     {
         Assert.IsNotNull(holesList, "holesList is not assigned.");
         Assert.IsNotNull(moleView, "moleView is not assigned.");
         Assert.IsNotNull(nonMoleView, "nonMoleView is not assigned.");
+        holesList.AddOnce(this);
 
-        holesList.Add(this);
     }
 
     public void PopHole(bool isMole, float durationToPop)

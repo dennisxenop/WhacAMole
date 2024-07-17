@@ -12,9 +12,20 @@ namespace Dennis.Variables
 
         public void Add(T item)
         {
-            if (value.Contains(item)) { Debug.LogWarning("Holebehaviour already added"); return; }
-
             value.Add(item);
+            Invoke();
+        }
+
+        public void AddOnce(T item)
+        {
+            if(value.Contains(item)) { Debug.LogWarning("item already added"); return; }
+
+            Add(item);
+        }
+
+        public void Set(List<T> items)
+        {
+            value = new List<T>(items);
             Invoke();
         }
 
@@ -33,5 +44,28 @@ namespace Dennis.Variables
         {
             return value.GetEnumerator();
         }
+
+        public override void ResetSOValues()
+        {
+            if(resetValue == null) {
+                value = new List<T>();
+                resetValue = new List<T>();
+            } else {
+                value = new List<T>(resetValue);
+            }
+        }
+
+#if UNITY_EDITOR
+        public override void SetResetValue()
+        {
+            if(value == null) {
+                value = new List<T>();
+                resetValue = new List<T>();
+            } else {
+                resetValue = new List<T>(value);
+            }
+        }
+#endif
+
     }
 }
