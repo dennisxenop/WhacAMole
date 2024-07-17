@@ -10,7 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: af893479c726e554a92a2298af74e6b5, type: 3}
-  m_Name: ShowRoundEndedPanel
+  m_Name: NewHighScore
   m_EditorClassIdentifier: 
-  DeveloperDescription: Is the round running
+  DeveloperDescription: 
+  resetOnSceneLoad: 1
   value: 0

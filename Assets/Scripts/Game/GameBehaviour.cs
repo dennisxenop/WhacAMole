@@ -4,6 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Assertions;
+using UnityEngine.SceneManagement;
 
 public class GameBehaviour : MonoBehaviour, IGameEventListener
 {
@@ -51,6 +52,10 @@ public class GameBehaviour : MonoBehaviour, IGameEventListener
     private Object playerNameEnteredEventObject;
     private IGameEvent playerNameEnteredEvent => playerNameEnteredEventObject as IGameEvent;
 
+    [SerializeField, RequireInterface(typeof(IGameEvent))]
+    private Object tryAgainButtonEventObject;
+    private IGameEvent tryAgainButtonEvent => tryAgainButtonEventObject as IGameEvent;
+
     [SerializeField]
     private FloatVariable timeLeft;
 
@@ -73,18 +78,25 @@ public class GameBehaviour : MonoBehaviour, IGameEventListener
         Assert.IsNotNull(timeLeft, "timeLeft is not assigned.");
         Assert.IsNotNull(roundEndedEvent, "roundEndedEvent is not assigned.");
         Assert.IsNotNull(playerNameEnteredEvent, "playerNameEnteredEvent is not assigned.");
+        Assert.IsNotNull(tryAgainButtonEventObject, "tryAgainButtonEventObject is not assigned.");
+
 
         startGameButtonEvent.RegisterListener(this, () => StartButtonClicked());
         playerNameEnteredEvent.RegisterListener(this, () => PlayerNameEntered());
+        tryAgainButtonEvent.RegisterListener(this, () => TryAgainButtonClicked());
 
         timeLeft.OnValueChanged -= timeLeftChanged;
         timeLeft.OnValueChanged += timeLeftChanged;
     }
 
+    private void TryAgainButtonClicked()
+    {
+        SceneManager.LoadScene(0);
+    }
+
     private void timeLeftChanged()
     {
-        if (timeLeft.Value <= 0)
-        {
+        if(timeLeft.Value <= 0) {
             StartCoroutine(RoundEnded());
         }
     }
@@ -97,8 +109,7 @@ public class GameBehaviour : MonoBehaviour, IGameEventListener
         showRoundEndedPanel.Value = true;
         yield return new WaitForSeconds(3);
         showRoundEndedPanel.Value = false;
-        if (newHighScoreVariable.Value)
-        {
+        if(newHighScoreVariable.Value) {
             showNewHighScorePanel.Value = true;
             yield return new WaitForSeconds(3);
         }

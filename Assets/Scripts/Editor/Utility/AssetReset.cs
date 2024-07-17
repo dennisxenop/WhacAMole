@@ -25,12 +25,12 @@ namespace Dennis.Utility
 
         private static void ResetAssetsOnExit()
         {
-            List<Object> resetAssets = Utility.FindAssetsByType<Object>().ToList().Where(x => x is IResetOnPlaymodeExit).ToList();
+            List<Object> resetAssets = Utility.FindAssetsByType<Object>().ToList().Where(x => x is IResetSOValues).ToList();
 
             if (resetAssets.Count == 0) return;
             foreach (var asset in resetAssets)
             {
-                ((IResetOnPlaymodeExit)asset).PlaymodeExitReset();
+                ((IResetSOValues)asset).ResetSOValues();
             }
         }
     }

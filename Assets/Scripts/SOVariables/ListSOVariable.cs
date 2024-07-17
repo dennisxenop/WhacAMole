@@ -44,5 +44,28 @@ namespace Dennis.Variables
         {
             return value.GetEnumerator();
         }
+
+        public override void ResetSOValues()
+        {
+            if(resetValue == null) {
+                value = new List<T>();
+                resetValue = new List<T>();
+            } else {
+                value = new List<T>(resetValue);
+            }
+        }
+
+#if UNITY_EDITOR
+        public override void SetResetValue()
+        {
+            if(value == null) {
+                value = new List<T>();
+                resetValue = new List<T>();
+            } else {
+                resetValue = new List<T>(value);
+            }
+        }
+#endif
+
     }
 }

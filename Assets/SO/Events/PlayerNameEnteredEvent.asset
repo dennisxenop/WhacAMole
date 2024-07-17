@@ -9,8 +9,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: af893479c726e554a92a2298af74e6b5, type: 3}
-  m_Name: ShowStartGamePanel
+  m_Script: {fileID: 11500000, guid: 3d6d5cbcf38e5e748a9bff8d179f3d3f, type: 3}
+  m_Name: PlayerNameEnteredEvent
   m_EditorClassIdentifier: 
-  DeveloperDescription: Is the round running
-  value: 0

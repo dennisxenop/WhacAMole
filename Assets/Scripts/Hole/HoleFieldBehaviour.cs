@@ -9,10 +9,10 @@ public class HoleFieldBehaviour : MonoBehaviour
     [SerializeField]
     private HolesListVariable holesListVariable;
 
-    private List<HoleBehaviour> holeListQueue = new List<HoleBehaviour>();
-
     [SerializeField]
     private BoolVariable roundRunning;
+
+    private Coroutine routine;
 
     public void OnEnable()
     {
@@ -22,8 +22,7 @@ public class HoleFieldBehaviour : MonoBehaviour
 
     public void OnDisable()
     {
-        if (roundRunning != null)
-        {
+        if(roundRunning != null) {
             roundRunning.OnValueChanged -= roundRunningChanged;
         }
     }
@@ -32,37 +31,25 @@ public class HoleFieldBehaviour : MonoBehaviour
     {
         Assert.IsNotNull(holesListVariable, "holesListVariable is not assigned in the inspector.");
         Assert.IsNotNull(roundRunning, "roundRunning is not assigned in the inspector.");
-
-        EnqueueHoleBehaviours();
-    }
-
-    private void EnqueueHoleBehaviours()
-    {
-        foreach (HoleBehaviour hole in holesListVariable)
-        {
-            Assert.IsNotNull(hole, "hole in holesListVariable is null.");
-            holeListQueue.Add(hole);
-        }
-
-        ListUtility.Shuffle(holeListQueue);
     }
 
     private void roundRunningChanged()
     {
-        if (roundRunning.Value)
-        {
-            StartCoroutine(routine());
+        if(roundRunning.Value) {
+            if(routine != null) {
+                StopCoroutine(routine);
+            }
+            routine = StartCoroutine(PopHoleCoroutine());
         }
     }
 
-    private IEnumerator routine()
+    private IEnumerator PopHoleCoroutine()
     {
-        while (roundRunning.Value)
-        {
-            IHole holeBehaviour = holesListVariable[UnityEngine.Random.Range(0, holesListVariable.Count)];
+        while(roundRunning.Value) {
+            IHole holeBehaviour = holesListVariable[Random.Range(0, holesListVariable.Count)];
             Assert.IsNotNull(holeBehaviour, "holeBehaviour is not found");
-            holeBehaviour.PopHole(UnityEngine.Random.value > 0.5f, UnityEngine.Random.Range(1, 4));
-            yield return new WaitForSeconds(UnityEngine.Random.Range(1, 2));
+            holeBehaviour.PopHole(Random.value > 0.5f, Random.Range(1, 4));
+            yield return new WaitForSeconds(Random.Range(1, 2));
         }
     }
 }

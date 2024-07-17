@@ -26,7 +26,7 @@ public class HoleBehaviour : MonoBehaviour, IHole
     {
         waitForEndOfFrame = new WaitForEndOfFrame();
     }
-    private void OnEnable()
+    private void Start()
     {
         Assert.IsNotNull(holesList, "holesList is not assigned.");
         Assert.IsNotNull(moleView, "moleView is not assigned.");

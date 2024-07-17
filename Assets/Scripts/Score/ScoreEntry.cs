@@ -1,10 +1,11 @@
 ﻿
+using System;
 using UnityEngine;
 
 namespace Dennis.Score
 {
     [System.Serializable]
-    public class ScoreEntry
+    public class ScoreEntry : ICloneable
     {
         [SerializeField]
         private string name;
@@ -18,5 +19,9 @@ namespace Dennis.Score
             this.score = score;
         }
 
+        public object Clone()
+        {
+            return new ScoreEntry(name, score);
+        }
     }
 }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.Assertions;
+using UnityEngine.SceneManagement;
 
 namespace Dennis.Events
 {
@@ -60,6 +61,19 @@ namespace Dennis.Events
                 if(eventListeners[listener].Count == 0) {
                     eventListeners.Remove(listener);
                 }
+            }
+        }
+
+        public GameEvent()
+        {
+            SceneManager.sceneUnloaded -= ResetValues;
+            SceneManager.sceneUnloaded += ResetValues;
+        }
+
+        private void ResetValues(Scene arg0)
+        {
+            if(this != null) {
+                eventListeners.Clear();
             }
         }
     }
