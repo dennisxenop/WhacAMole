@@ -24,4 +24,5 @@ namespace Dennis.Score
             return new ScoreEntry(name, score);
         }
     }
+
 }
