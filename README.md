@@ -38,3 +38,4 @@ Now, I will provide an explanation for some scripts. Not every script is describ
 
 **ScoreListUIBehaviour**: Displays a list of the score entrys in a scroll rect. It instantiates IScoreEntry objects to display each score.
 
+**PS. I migrated this project from plastic SCM to Git. so if branch naming seems a bit off its because of that.**
