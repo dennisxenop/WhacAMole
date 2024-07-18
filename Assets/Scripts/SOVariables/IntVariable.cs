@@ -1,13 +1,16 @@
-﻿using UnityEngine;
+﻿using Dennis.Variable;
+using UnityEngine;
 
 namespace Dennis.Variables
 {
     [CreateAssetMenu(fileName = "IntVariable", menuName = "Variables/IntVariable")]
     public class IntVariable : ScriptableObjectVariable<int>, ISOAccesableVariable<int>
     {
-        public int Value {
+        public int Value
+        {
             get { return value; }
-            set {
+            set
+            {
                 this.value = value;
                 Invoke();
             }

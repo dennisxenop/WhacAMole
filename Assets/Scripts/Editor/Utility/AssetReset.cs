@@ -1,5 +1,5 @@
 #if UNITY_EDITOR
-using Dennis.Reset;
+using Dennis.Variable;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEditor;

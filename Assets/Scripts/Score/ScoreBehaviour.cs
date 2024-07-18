@@ -1,4 +1,5 @@
 using Dennis.Events;
+using Dennis.Variable;
 using Dennis.Variables;
 using System.Collections.Generic;
 using System.IO;
@@ -72,7 +73,8 @@ namespace Dennis.Score
 
             scores.Set(LoadScores());
 
-            if(scores.Count > 0) {
+            if (scores.Count > 0)
+            {
                 UpdateLocalHighScoreVariable(scores[0].Name, scores[0].Score);
             }
         }
@@ -122,7 +124,8 @@ namespace Dennis.Score
 
         private void CheckForHighScore()
         {
-            if(highScore.Value.Score < currentScore.Value.Score) {
+            if (highScore.Value.Score < currentScore.Value.Score)
+            {
                 UpdateLocalHighScoreVariable(playerName.Value, currentScore.Value.Score);
                 newHighScoreVariable.Value = true;
             }
@@ -135,8 +138,10 @@ namespace Dennis.Score
 
         public void SaveScores(List<ScoreEntry> scores)
         {
-            using(StreamWriter writer = new StreamWriter(path)) {
-                foreach(ScoreEntry entry in scores) {
+            using (StreamWriter writer = new StreamWriter(path))
+            {
+                foreach (ScoreEntry entry in scores)
+                {
                     writer.WriteLine(entry.Name + "," + entry.Score);
                 }
             }
@@ -146,12 +151,16 @@ namespace Dennis.Score
         {
             List<ScoreEntry> highScores = new List<ScoreEntry>();
 
-            if(File.Exists(path)) {
-                using(StreamReader reader = new StreamReader(path)) {
+            if (File.Exists(path))
+            {
+                using (StreamReader reader = new StreamReader(path))
+                {
                     string line;
-                    while((line = reader.ReadLine()) != null) {
+                    while ((line = reader.ReadLine()) != null)
+                    {
                         string[] parts = line.Split(',');
-                        if(parts.Length == 2) {
+                        if (parts.Length == 2)
+                        {
                             ScoreEntry entry = new ScoreEntry(parts[0], int.Parse(parts[1]));
                             highScores.Add(entry);
                         }

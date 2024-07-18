@@ -6,6 +6,6 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/WhackAMole.unity
+    path: Assets/Scenes/WhacAMole.unity
     guid: 6048477974eaad745876e89af3a973c7
   m_configObjects: {}

@@ -11,7 +11,6 @@ namespace Dennis.Hole
         private GameEvent clickEvent;
 
         private bool isActive;
-
         public bool IsActive => isActive;
 
         public void OnClick()

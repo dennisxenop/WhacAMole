@@ -1,6 +1,7 @@
 using UnityEngine;
 using Dennis.Variables;
 using TMPro;
+using UnityEngine.Assertions;
 
 namespace Dennis.Timer
 {
@@ -14,6 +15,9 @@ namespace Dennis.Timer
 
         private void OnEnable()
         {
+            Assert.IsNotNull(timeLeft, "timeLeft is not found");
+            Assert.IsNotNull(timerText, "timerText is not found");
+
             timeLeft.OnValueChanged -= timeLeftChanged;
             timeLeft.OnValueChanged += timeLeftChanged;
         }

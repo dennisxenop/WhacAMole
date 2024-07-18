@@ -1,4 +1,4 @@
-﻿using Dennis.Reset;
+﻿using Dennis.Variable;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
@@ -19,8 +19,9 @@ namespace Dennis.Variables
 
         private void ResetValues(Scene arg0)
         {
-            if(this != null) {
-                if(!resetOnSceneLoad) return;
+            if (this != null)
+            {
+                if (!resetOnSceneLoad) return;
                 ResetSOValues();
             }
         }
@@ -36,7 +37,7 @@ namespace Dennis.Variables
 
         private void OnValidate()
         {
-            if(!Application.isPlaying) SetResetValue();
+            if (!Application.isPlaying) SetResetValue();
         }
 
         public virtual void SetResetValue()
@@ -58,21 +59,25 @@ namespace Dennis.Variables
 
         private void OnEnable()
         {
-            if(!IsReferenceType(typeof(T))) return;
-            if(EqualityComparer<T>.Default.Equals(value, default(T))) {
+            if (!IsReferenceType(typeof(T))) return;
+            if (EqualityComparer<T>.Default.Equals(value, default(T)))
+            {
                 value = Activator.CreateInstance<T>();
             }
-            if(EqualityComparer<T>.Default.Equals(resetValue, default(T))) {
+            if (EqualityComparer<T>.Default.Equals(resetValue, default(T)))
+            {
                 resetValue = Activator.CreateInstance<T>();
             }
         }
 
         private T DeepCopy(T original)
         {
-            if(original is ICloneable cloneable) {
+            if (original is ICloneable cloneable)
+            {
                 return (T)cloneable.Clone();
             }
-            if(original == null || original.GetType().IsValueType || original is string) {
+            if (original == null || original.GetType().IsValueType || original is string)
+            {
                 return original;
             }
 

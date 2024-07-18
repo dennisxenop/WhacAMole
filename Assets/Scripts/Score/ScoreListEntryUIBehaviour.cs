@@ -1,5 +1,6 @@
 using TMPro;
 using UnityEngine;
+using UnityEngine.Assertions;
 
 namespace Dennis.Score
 {
@@ -16,6 +17,10 @@ namespace Dennis.Score
 
         public void HighlightScore()
         {
+            Assert.IsNotNull(scoreNameText, "scoreNameText is not found");
+            Assert.IsNotNull(scoreText, "scoreText is not found");
+            Assert.IsNotNull(animationComponent, "animationComponent is not found");
+
             animationComponent.Play();
         }
 

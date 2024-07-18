@@ -18,6 +18,8 @@ namespace Dennis.Hole
         public void OnEnable()
         {
             Assert.IsNotNull(roundRunning, "roundRunning is not assigned in the inspector.");
+            Assert.IsNotNull(holesListVariable, "holesListVariable is not assigned in the inspector.");
+
             roundRunning.OnValueChanged += roundRunningChanged;
         }
 
@@ -26,12 +28,6 @@ namespace Dennis.Hole
             if(roundRunning != null) {
                 roundRunning.OnValueChanged -= roundRunningChanged;
             }
-        }
-
-        public void Start()
-        {
-            Assert.IsNotNull(holesListVariable, "holesListVariable is not assigned in the inspector.");
-            Assert.IsNotNull(roundRunning, "roundRunning is not assigned in the inspector.");
         }
 
         private void roundRunningChanged()
@@ -49,8 +45,8 @@ namespace Dennis.Hole
             while(roundRunning.Value) {
                 IHole holeBehaviour = holesListVariable[Random.Range(0, holesListVariable.Count)];
                 Assert.IsNotNull(holeBehaviour, "holeBehaviour is not found");
-                holeBehaviour.PopHole(Random.value > 0.5f, Random.Range(1, 4));
-                yield return new WaitForSeconds(Random.Range(1, 2));
+                holeBehaviour.PopHole(Random.value > 0.5f, Random.Range(0.7f, 3));
+                yield return new WaitForSeconds(Random.Range(0.5f, 2));
             }
         }
     }

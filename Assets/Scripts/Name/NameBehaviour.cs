@@ -1,8 +1,10 @@
 using Dennis.Events;
+using Dennis.Variable;
 using Dennis.Variables;
 using UnityEngine;
+using UnityEngine.Assertions;
 
-namespace Demmos.Name
+namespace Dennis.Name
 {
     public class NameBehaviour : MonoBehaviour, IGameEventListener
     {
@@ -28,14 +30,22 @@ namespace Demmos.Name
 
         public void OnEnable()
         {
+            Assert.IsNotNull(nameEnteredEvent, "nameEnteredEvent is not found");
+            Assert.IsNotNull(showInCorrectName, "showInCorrectName is not found");
+            Assert.IsNotNull(nameSuccesfullEntered, "nameSuccesfullEntered is not found");
+            Assert.IsNotNull(playerName, "playerName is not found");
+
             nameEnteredEvent.RegisterListener(this, () => NameEnteredEvent());
         }
 
         private void NameEnteredEvent()
         {
-            if(string.IsNullOrEmpty(playerName.Value)) {
+            if (string.IsNullOrEmpty(playerName.Value))
+            {
                 showInCorrectName.Value = true;
-            } else {
+            }
+            else
+            {
                 nameSuccesfullEntered.Raise();
             }
         }

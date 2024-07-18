@@ -1,4 +1,7 @@
-﻿public interface ISOAccesableVariable<T>
+﻿namespace Dennis.Variable
 {
-    public T Value { get; set; }
+    public interface ISOAccesableVariable<T>
+    {
+        public T Value { get; set; }
+    }
 }

@@ -1,4 +1,5 @@
-﻿using Dennis.Variables;
+﻿using Dennis.Variable;
+using Dennis.Variables;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -7,13 +8,13 @@ using UnityEngine.SceneManagement;
 
 namespace Dennis.Compare
 {
-    public abstract class VariableMultiCompareEvent<T, TV> : MonoBehaviour where T : ScriptableObjectVariable<TV>, ISOAccesableVariable<TV>
+    public abstract class VariableMultiCompareEvent<T, TT> : MonoBehaviour where T : ScriptableObjectVariable<TT>, ISOAccesableVariable<TT>
     {
         [SerializeField]
-        private List<CompareEvent<T, TV>> any = new List<CompareEvent<T, TV>>();
+        private List<CompareEvent<T, TT>> any = new List<CompareEvent<T, TT>>();
 
         [SerializeField]
-        private List<CompareEvent<T, TV>> all = new List<CompareEvent<T, TV>>();
+        private List<CompareEvent<T, TT>> all = new List<CompareEvent<T, TT>>();
 
         [Tooltip("Response to invoke when Event is raised.")]
         public UnityEvent<bool> Response;

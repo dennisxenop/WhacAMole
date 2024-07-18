@@ -1,4 +1,5 @@
 using Dennis.Events;
+using Dennis.Variable;
 using Dennis.Variables;
 using System.Collections;
 using UnityEngine;
@@ -123,7 +124,8 @@ namespace Dennis.Game
 
         private void timeLeftChanged()
         {
-            if(timeLeft.Value <= 0) {
+            if (timeLeft.Value <= 0)
+            {
                 StartCoroutine(RoundEnded());
             }
         }
@@ -139,7 +141,8 @@ namespace Dennis.Game
             showRoundEndedPanel.Value = false;
             showYourScorePanel.Value = true;
 
-            if(newHighScoreVariable.Value) {
+            if (newHighScoreVariable.Value)
+            {
                 showNewHighScorePanel.Value = true;
             }
 

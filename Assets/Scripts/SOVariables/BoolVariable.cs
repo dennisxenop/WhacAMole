@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Dennis.Variable;
+using UnityEngine;
 
 namespace Dennis.Variables
 {
