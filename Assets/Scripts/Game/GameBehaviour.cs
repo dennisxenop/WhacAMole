@@ -44,6 +44,10 @@ public class GameBehaviour : MonoBehaviour, IGameEventListener
     private Object newHighScoreVariableObject;
     private ISOAccesableVariable<bool> newHighScoreVariable => newHighScoreVariableObject as ISOAccesableVariable<bool>;
 
+    [SerializeField, RequireInterface(typeof(ISOAccesableVariable<bool>))]
+    private Object showYourScorePanelObject;
+    private ISOAccesableVariable<bool> showYourScorePanel => showYourScorePanelObject as ISOAccesableVariable<bool>;
+
     [Header("Events Receive")]
     [SerializeField, RequireInterface(typeof(IGameEvent))]
     private Object startGameButtonEventObject;
@@ -55,6 +59,8 @@ public class GameBehaviour : MonoBehaviour, IGameEventListener
     [SerializeField, RequireInterface(typeof(IGameEvent))]
     private Object tryAgainButtonEventObject;
     private IGameEvent tryAgainButtonEvent => tryAgainButtonEventObject as IGameEvent;
+
+
 
     [SerializeField]
     private FloatVariable timeLeft;
@@ -79,6 +85,7 @@ public class GameBehaviour : MonoBehaviour, IGameEventListener
         Assert.IsNotNull(roundEndedEvent, "roundEndedEvent is not assigned.");
         Assert.IsNotNull(playerNameEnteredEvent, "playerNameEnteredEvent is not assigned.");
         Assert.IsNotNull(tryAgainButtonEventObject, "tryAgainButtonEventObject is not assigned.");
+        Assert.IsNotNull(showYourScorePanel, "showYourScorePanel is not assigned.");
 
 
         startGameButtonEvent.RegisterListener(this, () => StartButtonClicked());
@@ -96,7 +103,8 @@ public class GameBehaviour : MonoBehaviour, IGameEventListener
 
     private void timeLeftChanged()
     {
-        if(timeLeft.Value <= 0) {
+        if (timeLeft.Value <= 0)
+        {
             StartCoroutine(RoundEnded());
         }
     }
@@ -105,14 +113,16 @@ public class GameBehaviour : MonoBehaviour, IGameEventListener
     {
         roundRunning.Value = false;
         roundEndedEvent.Raise();
-        yield return new WaitForSeconds(1);
         showRoundEndedPanel.Value = true;
         yield return new WaitForSeconds(3);
         showRoundEndedPanel.Value = false;
-        if(newHighScoreVariable.Value) {
+        showYourScorePanel.Value = true;
+        if (newHighScoreVariable.Value)
+        {
             showNewHighScorePanel.Value = true;
-            yield return new WaitForSeconds(3);
         }
+        yield return new WaitForSeconds(3);
+        showYourScorePanel.Value = false;
         showNewHighScorePanel.Value = false;
         showScorePanel.Value = true;
     }
