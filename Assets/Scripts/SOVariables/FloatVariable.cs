@@ -5,11 +5,9 @@ namespace Dennis.Variables
     [CreateAssetMenu(fileName = "FloatVariable", menuName = "Variables/FloatVariable")]
     public class FloatVariable : ScriptableObjectVariable<float>, ISOAccesableVariable<float>
     {
-        public float Value
-        {
+        public float Value {
             get { return value; }
-            set
-            {
+            set {
                 this.value = value;
                 Invoke();
             }

@@ -1,0 +1,72 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1621244021813288154
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8283488246279556870}
+  - component: {fileID: 8974596899455398355}
+  m_Layer: 0
+  m_Name: GameBehaviour
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8283488246279556870
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1621244021813288154}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8974596899455398355
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1621244021813288154}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ecfde41d6aed6b54b9ef6fbea2177639, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  showStartPlanelObject: {fileID: 11400000, guid: 553225ddd5b1b9949ab790bf30543746,
+    type: 2}
+  showEnterPlayerNamePanelObject: {fileID: 11400000, guid: 8885db5ce1b888642ac2ffa18855b6ac,
+    type: 2}
+  roundRunningObject: {fileID: 11400000, guid: 6b6c79bf49b674541a6a20f03b39fd70, type: 2}
+  showRoundEndedPanelObject: {fileID: 11400000, guid: 0c788656fa9e49b4184dd908b70c15a3,
+    type: 2}
+  roundEndedEventObject: {fileID: 11400000, guid: 9f029cda8e9b0c84ca45b8060b5d5738,
+    type: 2}
+  gameStartedEventObject: {fileID: 11400000, guid: 41ef7b7a9e669ab43b7dabb15326aa3d,
+    type: 2}
+  showNewHighScorePanelObject: {fileID: 11400000, guid: aa173e17200b34645ab87d9821dec152,
+    type: 2}
+  showScorePanelObject: {fileID: 11400000, guid: 5f30d044d6506674e9bb4e968159fec6,
+    type: 2}
+  newHighScoreVariableObject: {fileID: 11400000, guid: 1232745728d6d944a86d795c7aa85e81,
+    type: 2}
+  showYourScorePanelObject: {fileID: 11400000, guid: 2330e8f309c43a243848136cdcf0b639,
+    type: 2}
+  startGameButtonEventObject: {fileID: 11400000, guid: 38b9420d2cfb7154db88779cb96ef1f0,
+    type: 2}
+  playerNameEnteredEventObject: {fileID: 11400000, guid: 7267c03e822e4914a8826fa9008699a0,
+    type: 2}
+  tryAgainButtonEventObject: {fileID: 11400000, guid: 0abac1f92744f274fbbcf37f95e8bcae,
+    type: 2}
+  timeLeft: {fileID: 11400000, guid: e8a491c92eb9bb04497c684d46b73b60, type: 2}

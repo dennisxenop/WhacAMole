@@ -56,6 +56,7 @@ namespace Dennis.Variables
         }
 
 #if UNITY_EDITOR
+
         public override void SetResetValue()
         {
             if(value == null) {
@@ -65,7 +66,7 @@ namespace Dennis.Variables
                 resetValue = new List<T>(value);
             }
         }
-#endif
 
+#endif
     }
 }

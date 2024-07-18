@@ -1,9 +1,9 @@
-﻿using UnityEngine;
+﻿using Dennis.Variables;
+using UnityEngine;
 
-namespace Dennis.Variables
+namespace Dennis.Hole
 {
     [CreateAssetMenu(fileName = "HoleListVariable", menuName = "Variables/HoleListVariable")]
-
     public class HolesListVariable : ListSOVariable<IHole>
     {
     }

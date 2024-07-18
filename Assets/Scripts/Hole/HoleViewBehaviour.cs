@@ -1,28 +1,31 @@
+using Dennis.Common;
 using Dennis.Events;
-using System.Runtime.InteropServices.WindowsRuntime;
 using UnityEngine;
 using UnityEngine.Assertions;
 
-public class HoleViewBehaviour : MonoBehaviour, IHoleView, IClick
+namespace Dennis.Hole
 {
-    [SerializeField]
-    private GameEvent clickEvent;
-
-    private bool isActive;
-
-    public bool IsActive => isActive;
-
-    public void OnClick()
+    public class HoleViewBehaviour : MonoBehaviour, IHoleView, IClick
     {
-        Assert.IsNotNull(clickEvent, "clickEvent is not found");
-        clickEvent.Raise();
-        gameObject.SetActive(false);
-        isActive = false;
-    }
+        [SerializeField]
+        private GameEvent clickEvent;
 
-    public void SetActiveState(bool isActive)
-    {
-        this.isActive = isActive;
-        gameObject.SetActive(isActive);
+        private bool isActive;
+
+        public bool IsActive => isActive;
+
+        public void OnClick()
+        {
+            Assert.IsNotNull(clickEvent, "clickEvent is not found");
+            clickEvent.Raise();
+            gameObject.SetActive(false);
+            isActive = false;
+        }
+
+        public void SetActiveState(bool isActive)
+        {
+            this.isActive = isActive;
+            gameObject.SetActive(isActive);
+        }
     }
 }

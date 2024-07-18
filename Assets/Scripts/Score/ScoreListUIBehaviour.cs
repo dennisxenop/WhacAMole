@@ -1,54 +1,63 @@
-using Dennis.Score;
+using Dennis.Variables;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Assertions;
 
-public class ScoreListUIBehaviour : MonoBehaviour
+namespace Dennis.Score
 {
-    [SerializeField]
-    private ScoreListVariable scoreListVariable;
-
-    [SerializeField]
-    private Transform contentParent;
-
-    [SerializeField]
-    private GameObject scoreEntryPrefabObject;
-
-    private List<IScoreEntry> instantiedScoreEntrys = new List<IScoreEntry>();
-    public void OnEnable()
+    public class ScoreListUIBehaviour : MonoBehaviour
     {
-        scoreListVariable.OnValueChanged -= UpdateList;
-        scoreListVariable.OnValueChanged += UpdateList;
-    }
-    public void OnDisable()
-    {
-        scoreListVariable.OnValueChanged -= UpdateList;
-    }
+        [SerializeField]
+        private ScoreListVariable scoreListVariable;
 
-    private void UpdateList()
-    {
-        foreach (Transform entry in contentParent)
+        [SerializeField]
+        private Transform contentParent;
+
+        [SerializeField]
+        private GameObject scoreEntryUIPrefabObject;
+
+        private List<IScoreEntry> instantiedScoreEntrys = new List<IScoreEntry>();
+
+        [SerializeField]
+        private ScoreVariable currentScore;
+
+        private int yourScoreIndex = -1;
+
+        public void OnEnable()
         {
-            Destroy(entry.gameObject);
-
+            scoreListVariable.OnValueChanged -= UpdateList;
+            scoreListVariable.OnValueChanged += UpdateList;
         }
-        instantiedScoreEntrys.Clear();
 
-        for (int i = 0; i < scoreListVariable.Count; i++)
+        public void OnDisable()
         {
-            IScoreEntry scoreEntry = Instantiate(scoreEntryPrefabObject, contentParent).GetComponent<IScoreEntry>();
-            scoreEntry.Setup(scoreListVariable[i].Name, scoreListVariable[i].Score);
-            instantiedScoreEntrys.Add(scoreEntry);
+            scoreListVariable.OnValueChanged -= UpdateList;
         }
-    }
 
-    public void OnValidate()
-    {
-        if (scoreEntryPrefabObject != null)
+        private void UpdateList()
         {
-            IScoreEntry scoreEntry = scoreEntryPrefabObject.GetComponent<IScoreEntry>();
-            if (scoreEntry == null) { scoreEntryPrefabObject = null; }
-            Assert.IsNotNull(scoreEntryPrefabObject, "scoreEntryPrefabObject does not contain IScoreEntry");
+            foreach(Transform entry in contentParent) {
+                Destroy(entry.gameObject);
+            }
+            instantiedScoreEntrys.Clear();
+
+            for(int i = 0; i < scoreListVariable.Count; i++) {
+                IScoreEntry scoreEntry = Instantiate(scoreEntryUIPrefabObject, contentParent).GetComponent<IScoreEntry>();
+                scoreEntry.Setup(scoreListVariable[i].Name, scoreListVariable[i].Score);
+                instantiedScoreEntrys.Add(scoreEntry);
+                if(scoreListVariable[i] == currentScore.Value) {
+                    scoreEntry.HighlightScore();
+                }
+            }
+        }
+
+        public void OnValidate()
+        {
+            if(scoreEntryUIPrefabObject != null) {
+                IScoreEntry scoreEntry = scoreEntryUIPrefabObject.GetComponent<IScoreEntry>();
+                if(scoreEntry == null) { scoreEntryUIPrefabObject = null; }
+                Assert.IsNotNull(scoreEntryUIPrefabObject, "scoreEntryPrefabObject does not contain IScoreEntry");
+            }
         }
     }
 }

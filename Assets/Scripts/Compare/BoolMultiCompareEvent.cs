@@ -1,6 +1,6 @@
-﻿using System.Collections.Generic;
-using Dennis.Variables;
-namespace Dennis
+﻿using Dennis.Variables;
+
+namespace Dennis.Compare
 {
     public class BoolMultiCompareEvent : VariableMultiCompareEvent<BoolVariable, bool>
     {

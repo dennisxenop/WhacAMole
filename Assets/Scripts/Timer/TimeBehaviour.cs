@@ -19,6 +19,7 @@ namespace Dennis.Timer
 
         private float currentTime;
         private int lastTimeInSeconds;
+
         private void OnEnable()
         {
             roundRunning.OnValueChanged -= roundRunningChanged;
@@ -36,8 +37,7 @@ namespace Dennis.Timer
         {
             StopCountdown();
 
-            if (!roundRunning.Value || timeLeft.Value <= 0)
-            {
+            if(!roundRunning.Value || timeLeft.Value <= 0) {
                 return;
             }
 
@@ -46,8 +46,7 @@ namespace Dennis.Timer
 
         private void StopCountdown()
         {
-            if (countdownCoroutine != null)
-            {
+            if(countdownCoroutine != null) {
                 StopCoroutine(countdownCoroutine);
             }
         }
@@ -59,13 +58,11 @@ namespace Dennis.Timer
 
         private IEnumerator CountdownRoutine()
         {
-            while (currentTime > 0)
-            {
+            while(currentTime > 0) {
                 currentTime -= Time.deltaTime;
                 int roundedTime = Mathf.CeilToInt(currentTime);
 
-                if (roundedTime != lastTimeInSeconds)
-                {
+                if(roundedTime != lastTimeInSeconds) {
                     lastTimeInSeconds = roundedTime;
                     timeLeft.Value = lastTimeInSeconds;
                 }

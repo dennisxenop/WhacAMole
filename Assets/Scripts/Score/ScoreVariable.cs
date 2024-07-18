@@ -1,6 +1,4 @@
-﻿
-using Dennis.Score;
-using System.Runtime.CompilerServices;
+﻿using Dennis.Score;
 using UnityEngine;
 
 namespace Dennis.Variables

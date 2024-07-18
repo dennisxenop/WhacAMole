@@ -1,5 +1,4 @@
-﻿
-using System;
+﻿using System;
 using UnityEngine;
 
 namespace Dennis.Score
@@ -9,12 +8,18 @@ namespace Dennis.Score
     {
         [SerializeField]
         private string name;
+
         public string Name { get { return name; } }
+
         [SerializeField]
         private int score;
+
         public int Score { get { return score; } }
 
-        public ScoreEntry() : this("",0){}
+        public ScoreEntry() : this("", 0)
+        {
+        }
+
         public ScoreEntry(string name, int score)
         {
             this.name = name;
@@ -26,5 +31,4 @@ namespace Dennis.Score
             return new ScoreEntry(name, score);
         }
     }
-
 }

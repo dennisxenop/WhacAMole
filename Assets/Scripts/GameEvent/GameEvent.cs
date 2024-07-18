@@ -15,7 +15,6 @@ namespace Dennis.Events
         public void Raise()
         {
             foreach(KeyValuePair<IGameEventListener, List<Action>> eventListener in eventListeners.Reverse()) {
-
                 Assert.IsNotNull(eventListener.Key, "EventListener key cannot be null.");
                 Assert.IsNotNull(eventListener.Value, "EventListener value cannot be null.");
 
@@ -24,7 +23,6 @@ namespace Dennis.Events
                 }
 
                 foreach(Action eventAction in eventListener.Value) {
-
                     Assert.IsNotNull(eventAction, "EventAction cannot be null.");
 
                     if(eventAction == null) {

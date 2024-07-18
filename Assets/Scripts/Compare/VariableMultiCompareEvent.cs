@@ -1,28 +1,32 @@
-﻿using System.Collections.Generic;
+﻿using Dennis.Variables;
+using System.Collections.Generic;
+using System.Linq;
+using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.SceneManagement;
-using UnityEngine;
-using System.Linq;
-using Dennis.Variables;
 
-namespace Dennis
+namespace Dennis.Compare
 {
-    public partial class VariableMultiCompareEvent<T, TV> : MonoBehaviour where T : ScriptableObjectVariable<TV>,ISOAccesableVariable<TV>
+    public abstract class VariableMultiCompareEvent<T, TV> : MonoBehaviour where T : ScriptableObjectVariable<TV>, ISOAccesableVariable<TV>
     {
         [SerializeField]
         private List<CompareEvent<T, TV>> any = new List<CompareEvent<T, TV>>();
+
         [SerializeField]
         private List<CompareEvent<T, TV>> all = new List<CompareEvent<T, TV>>();
 
         [Tooltip("Response to invoke when Event is raised.")]
         public UnityEvent<bool> Response;
+
         [Tooltip("Response to invoke when Event is raised and true.")]
         public UnityEvent<bool> ResponseTrue;
+
         [Tooltip("Response to invoke when Event is raised and false.")]
         public UnityEvent<bool> ResponseFalse;
 
         [SerializeField]
         private bool subscribeWhenDeactived;
+
         private bool subscribed;
 
         public VariableMultiCompareEvent()
@@ -30,11 +34,11 @@ namespace Dennis
             SceneManager.sceneLoaded -= OnSceneLoaded;
             SceneManager.sceneLoaded += OnSceneLoaded;
         }
+
         private void OnSceneLoaded(Scene scene, LoadSceneMode loadMethod)
         {
             if(subscribeWhenDeactived && this != null && !subscribed) {
                 Subscribe();
-              
             }
         }
 
@@ -77,7 +81,6 @@ namespace Dennis
                 all[i].Variable.OnValueChanged -= Changed;
             }
             SceneManager.sceneLoaded -= OnSceneLoaded;
-
         }
 
         public void Destroy()

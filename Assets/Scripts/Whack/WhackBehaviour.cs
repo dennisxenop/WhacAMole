@@ -1,5 +1,4 @@
 using Dennis.Events;
-using Dennis.Variables;
 using System;
 using UnityEngine;
 using UnityEngine.Assertions;
@@ -8,18 +7,22 @@ public class WhackBehaviour : MonoBehaviour, IGameEventListener
 {
     [SerializeField, RequireInterface(typeof(IGameEvent))]
     private UnityEngine.Object whackGoodEventObject;
+
     private IGameEvent whackGoodEvent => whackGoodEventObject as IGameEvent;
 
     [SerializeField, RequireInterface(typeof(IGameEvent))]
     private UnityEngine.Object whackWrongEventObject;
+
     private IGameEvent whackWrongEvent => whackWrongEventObject as IGameEvent;
 
     [SerializeField, RequireInterface(typeof(IGameEvent))]
     private UnityEngine.Object AddToScoreEventObject;
+
     private IGameEvent addToScoreEvent => AddToScoreEventObject as IGameEvent;
 
     [SerializeField, RequireInterface(typeof(IGameEvent))]
     private UnityEngine.Object subtractFromScoreEventObject;
+
     private IGameEvent subtractFromScoreEvent => subtractFromScoreEventObject as IGameEvent;
 
     public void OnEnable()
@@ -43,10 +46,12 @@ public class WhackBehaviour : MonoBehaviour, IGameEventListener
     {
         addToScoreEvent.Raise();
     }
+
     private void WhackWrongEvent()
     {
         subtractFromScoreEvent.Raise();
     }
+
     public void OnEventRaised(Action EventAction)
     {
         EventAction();

@@ -1,17 +1,18 @@
 ﻿using UnityEngine;
 
-namespace Dennis
+namespace Dennis.Compare
 {
     [System.Serializable]
-    public class CompareEvent<T, TV>
+    public class CompareEvent<T, TT>
     {
         [SerializeField]
         private T variable;
+
         public T Variable { get { return variable; } }
+
         [SerializeField]
-        private TV compareVariable;
-        public TV CompareVariable { get { return compareVariable; } }
+        private TT compareVariable;
 
+        public TT CompareVariable { get { return compareVariable; } }
     }
-
 }

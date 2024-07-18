@@ -2,7 +2,6 @@ using Dennis.Events;
 using Dennis.Variables;
 using System.Collections.Generic;
 using System.IO;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Assertions;
 
@@ -14,6 +13,7 @@ namespace Dennis.Score
 
         [SerializeField]
         private ScoreVariable currentScore;
+
         [SerializeField]
         private ScoreVariable highScore;
 
@@ -25,18 +25,27 @@ namespace Dennis.Score
 
         [SerializeField, RequireInterface(typeof(IGameEvent))]
         private Object roundEndedObject;
+
         private IGameEvent roundEndedEvent => roundEndedObject as IGameEvent;
 
         [SerializeField, RequireInterface(typeof(IGameEvent))]
         private UnityEngine.Object AddToScoreEventObject;
+
         private IGameEvent addToScoreEvent => AddToScoreEventObject as IGameEvent;
 
         [SerializeField, RequireInterface(typeof(IGameEvent))]
         private UnityEngine.Object subtractFromScoreEventObject;
+
         private IGameEvent subtractFromScoreEvent => subtractFromScoreEventObject as IGameEvent;
+
+        [SerializeField, RequireInterface(typeof(IGameEvent))]
+        private Object playerNameEnteredEventObject;
+
+        private IGameEvent playerNameEnteredEvent => playerNameEnteredEventObject as IGameEvent;
 
         [SerializeField, RequireInterface(typeof(ISOAccesableVariable<bool>))]
         private UnityEngine.Object newHighScoreVariableObject;
+
         private ISOAccesableVariable<bool> newHighScoreVariable => newHighScoreVariableObject as ISOAccesableVariable<bool>;
 
         private void OnEnable()
@@ -49,6 +58,7 @@ namespace Dennis.Score
             Assert.IsNotNull(addToScoreEvent, "roundEnded is not assigned.");
             Assert.IsNotNull(subtractFromScoreEvent, "roundEnded is not assigned.");
             Assert.IsNotNull(newHighScoreVariable, "newHighScoreVariable is not assigned.");
+            Assert.IsNotNull(playerNameEnteredEvent, "playerNameEnteredEvent is not assigned.");
 
             path = Path.Combine(Application.persistentDataPath, "score.txt");
 
@@ -57,6 +67,7 @@ namespace Dennis.Score
 
             roundEndedEvent.RegisterListener(this, () => RoundEnded());
             addToScoreEvent.RegisterListener(this, () => AddToScore());
+            playerNameEnteredEvent.RegisterListener(this, () => NameEntered());
             subtractFromScoreEvent.RegisterListener(this, () => SubtractScore());
 
             scores.Set(LoadScores());
@@ -66,16 +77,26 @@ namespace Dennis.Score
             }
         }
 
+        private void NameEntered()
+        {
+            SetScore(0);
+        }
+
+        private void SetScore(int newScore)
+        {
+            currentScore.Value = new ScoreEntry(playerName.Value, newScore);
+        }
+
         private void SubtractScore()
         {
             int newScore = currentScore.Value.Score - 1;
-            currentScore.Value = new ScoreEntry(playerName.Value, newScore);
+            SetScore(newScore);
         }
 
         private void AddToScore()
         {
             int newScore = currentScore.Value.Score + 1;
-            currentScore.Value = new ScoreEntry(playerName.Value, newScore);
+            SetScore(newScore);
         }
 
         private void RoundEnded()

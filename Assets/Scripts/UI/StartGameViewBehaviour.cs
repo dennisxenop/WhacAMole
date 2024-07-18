@@ -1,7 +1,5 @@
+using Dennis.Common;
 using Dennis.Events;
-using Dennis.Variables;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class StartGameViewBehaviour : MonoBehaviour, IClick

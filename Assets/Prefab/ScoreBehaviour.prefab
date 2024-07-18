@@ -1,0 +1,59 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1294133888844994286
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7495056178764479372}
+  - component: {fileID: 7992768672267054615}
+  m_Layer: 0
+  m_Name: ScoreBehaviour
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7495056178764479372
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1294133888844994286}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7992768672267054615
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1294133888844994286}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4787d33c50cf34246adc0d10b69055a0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentScore: {fileID: 11400000, guid: 4e8c7237fc05a2e48b25c1705a8524da, type: 2}
+  highScore: {fileID: 11400000, guid: 185e4f56b95ef6840a3ae2473890ad7b, type: 2}
+  scores: {fileID: 11400000, guid: dc5a99b43a652ef49af7718e8d020646, type: 2}
+  playerName: {fileID: 11400000, guid: d4e4f8d8ab12b7a4d965776122eb10d7, type: 2}
+  roundEndedObject: {fileID: 11400000, guid: 9f029cda8e9b0c84ca45b8060b5d5738, type: 2}
+  AddToScoreEventObject: {fileID: 11400000, guid: 3ec7c4fc2dc2e1a4b83834c3da710809,
+    type: 2}
+  subtractFromScoreEventObject: {fileID: 11400000, guid: 36aee9aa88e2ca14c9f0456570054049,
+    type: 2}
+  playerNameEnteredEventObject: {fileID: 11400000, guid: 7267c03e822e4914a8826fa9008699a0,
+    type: 2}
+  newHighScoreVariableObject: {fileID: 11400000, guid: 1232745728d6d944a86d795c7aa85e81,
+    type: 2}
