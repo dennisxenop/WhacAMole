@@ -13,6 +13,8 @@ namespace Dennis.Score
         [SerializeField]
         private int score;
         public int Score { get { return score; } }
+
+        public ScoreEntry() : this("",0){}
         public ScoreEntry(string name, int score)
         {
             this.name = name;

@@ -23,8 +23,9 @@ namespace Dennis.Variables
 
         private void ResetValues(Scene arg0)
         {
-            if(this != null) {
-                if(!resetOnSceneLoad) return;
+            if (this != null)
+            {
+                if (!resetOnSceneLoad) return;
                 ResetSOValues();
             }
         }
@@ -39,7 +40,7 @@ namespace Dennis.Variables
 #if UNITY_EDITOR
         private void OnValidate()
         {
-            if(!Application.isPlaying) SetResetValue();
+            if (!Application.isPlaying) SetResetValue();
         }
         public virtual void SetResetValue()
         {
@@ -60,25 +61,33 @@ namespace Dennis.Variables
 
         private void OnEnable()
         {
-            if(EqualityComparer<T>.Default.Equals(value, default(T))) {
+            if (!IsReferenceType(typeof(T))) return;
+            if (EqualityComparer<T>.Default.Equals(value, default(T)))
+            {
                 value = Activator.CreateInstance<T>();
             }
-            if(EqualityComparer<T>.Default.Equals(resetValue, default(T))) {
+            if (EqualityComparer<T>.Default.Equals(resetValue, default(T)))
+            {
                 resetValue = Activator.CreateInstance<T>();
             }
         }
 
         private T DeepCopy(T original)
         {
-            if(original == null || original.GetType().IsValueType || original is string) {
+            if (original is ICloneable cloneable)
+            {
+                return (T)cloneable.Clone();
+            }
+            if (original == null || original.GetType().IsValueType || original is string)
+            {
                 return original;
             }
 
-            if(original is ICloneable cloneable) {
-                return (T)cloneable.Clone();
-            }
-
             throw new InvalidOperationException($"DeepCopy is not supported for type {typeof(T)}");
+        }
+        public static bool IsReferenceType(Type type)
+        {
+            return (type.IsClass || type.IsInterface || type.IsArray) && type != typeof(string);
         }
     }
 }
